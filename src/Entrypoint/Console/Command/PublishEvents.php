@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use ZoiloMora\HikvisionCommunicator\Application\PublishEvents\PublishEventsCommand;
 use ZoiloMora\HikvisionCommunicator\Application\PublishEvents\PublishEventsHandler;
 
-class PublishEvents extends Command
+final class PublishEvents extends Command
 {
     private PublishEventsHandler $handler;
 

@@ -9,13 +9,15 @@ use ZoiloMora\HikvisionCommunicator\Domain\Model\Event\Aggregate\Device;
 use ZoiloMora\HikvisionCommunicator\Domain\Model\Event\Event;
 use ZoiloMora\HikvisionCommunicator\Domain\Model\Event\EventRepository;
 
-class FakeSmtpEventRepository implements EventRepository
+final class FakeSmtpEventRepository implements EventRepository
 {
     private Client $client;
+    private \DateTimeZone $dateTimeZone;
 
-    public function __construct(Client $client)
+    public function __construct(Client $client, string $timezone)
     {
         $this->client = $client;
+        $this->dateTimeZone = new \DateTimeZone($timezone);
     }
 
     public function getAll(): array
@@ -23,7 +25,7 @@ class FakeSmtpEventRepository implements EventRepository
         $response = $this->client->get('/api/emails');
         $raw = $response->getBody()->getContents();
 
-        $objects = json_decode($raw, true);
+        $objects = \json_decode($raw, true);
 
         $events = [];
         foreach ($objects as $object) {
@@ -71,7 +73,7 @@ class FakeSmtpEventRepository implements EventRepository
         preg_match_all('/EVENT TIME:[ ]*(.*)/', $body, $output_array);
         $text = \trim($output_array[1][0]);
 
-        return \DateTime::createFromFormat('Y-m-d,H:i:s', $text);
+        return \DateTime::createFromFormat('Y-m-d,H:i:s', $text, $this->dateTimeZone);
     }
 
     private function mapDvrName(string $body): string

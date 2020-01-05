@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/php/Dockerfile
+    command: console app:event:publish-all
     volumes:
       - ./:/var/app
       - ~/.composer:/.composer

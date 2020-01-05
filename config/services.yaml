@@ -1,5 +1,10 @@
 parameters:
+  timezone: '%env(TIMEZONE)%'
   fake_smtp_api.base_uri: '%env(FAKE_SMTP_API_URI)%'
+  mqtt.client_id: '%env(MQTT_CLIENT_ID)%'
+  mqtt.broker: '%env(MQTT_BROKER)%'
+  mqtt.port: '%env(MQTT_PORT)%'
+  mqtt.topic: '%env(MQTT_TOPIC)%'
 
 services:
   _defaults:
@@ -19,7 +24,22 @@ services:
     arguments:
       - base_uri: '%fake_smtp_api.base_uri%'
 
+  mqtt.client:
+    class: Mosquitto\Client
+    factory: 'ZoiloMora\HikvisionCommunicator\Infrastructure\Service\MQTTClientFactory::build'
+    arguments:
+      $clientId: '%mqtt.client_id%'
+      $broker: '%mqtt.broker%'
+      $port: '%mqtt.port%'
+
   ZoiloMora\HikvisionCommunicator\Infrastructure\Domain\Model\Event\FakeSmtpEventRepository:
     class: ZoiloMora\HikvisionCommunicator\Infrastructure\Domain\Model\Event\FakeSmtpEventRepository
     arguments:
       $client: '@http.client.fake_smtp'
+      $timezone: '%timezone%'
+
+  ZoiloMora\HikvisionCommunicator\Infrastructure\Domain\Service\Event\MqttPublisher:
+    class: ZoiloMora\HikvisionCommunicator\Infrastructure\Domain\Service\Event\MqttPublisher
+    arguments:
+      $client: '@mqtt.client'
+      $topic: '%mqtt.topic%'
