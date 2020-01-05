@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    volumes:
+      - ./:/var/app
+      - ~/.composer:/.composer
+    depends_on:
+      - fake-smtp-server
+      - mqtt
+    restart: unless-stopped
+
+  fake-smtp-server:
+    image: reachfive/fake-smtp-server
+    ports:
+      - ${FAKE_SMTP_PORT}:1025
+    restart: unless-stopped
+
+  mqtt:
+    image: eclipse-mosquitto
+    ports:
+      - ${MQTT_PORT}:1883
+    restart: unless-stopped

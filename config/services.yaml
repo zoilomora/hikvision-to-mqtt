@@ -1,0 +1,25 @@
+parameters:
+  fake_smtp_api.base_uri: '%env(FAKE_SMTP_API_URI)%'
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  ZoiloMora\HikvisionCommunicator\:
+    resource: '../src/*'
+    exclude: '../src/{Kernel.php}'
+
+  ZoiloMora\HikvisionCommunicator\Entrypoint\Console\:
+    resource: '../src/Entrypoint/Console/*'
+    tags: ['console.command']
+
+  http.client.fake_smtp:
+    class: GuzzleHttp\Client
+    arguments:
+      - base_uri: '%fake_smtp_api.base_uri%'
+
+  ZoiloMora\HikvisionCommunicator\Infrastructure\Domain\Model\Event\FakeSmtpEventRepository:
+    class: ZoiloMora\HikvisionCommunicator\Infrastructure\Domain\Model\Event\FakeSmtpEventRepository
+    arguments:
+      $client: '@http.client.fake_smtp'
