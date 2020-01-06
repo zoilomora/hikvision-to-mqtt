@@ -26,11 +26,9 @@ services:
 
   mqtt.client:
     class: Mosquitto\Client
-    factory: 'ZoiloMora\HikvisionCommunicator\Infrastructure\Service\MQTTClientFactory::build'
     arguments:
-      $clientId: '%mqtt.client_id%'
-      $broker: '%mqtt.broker%'
-      $port: '%mqtt.port%'
+      $id: '%mqtt.client_id%'
+      $cleanSession: true
 
   ZoiloMora\HikvisionCommunicator\Infrastructure\Domain\Model\Event\FakeSmtpEventRepository:
     class: ZoiloMora\HikvisionCommunicator\Infrastructure\Domain\Model\Event\FakeSmtpEventRepository
@@ -42,4 +40,6 @@ services:
     class: ZoiloMora\HikvisionCommunicator\Infrastructure\Domain\Service\Event\MqttPublisher
     arguments:
       $client: '@mqtt.client'
+      $broker: '%mqtt.broker%'
+      $port: '%mqtt.port%'
       $topic: '%mqtt.topic%'
