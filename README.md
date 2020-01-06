@@ -64,9 +64,9 @@
         docker-compose up -d
 
 ## DVR settings
-1. Use the [iVMS-4200 Client](marhttps://www.hikvision.com/en/support/download/software/ivms4200-series/) to access the remote configuration of the device.
+1. Use the [iVMS-4200 Client](https://www.hikvision.com/en/support/download/software/ivms4200-series/) to access the remote configuration of the device.
 
-2. go to `Event > Email` and configure the `fake-smpt-server` as **SMTP Server** (default port 1025).
+2. Go to `Event > Email` and configure the `fake-smpt-server` as **SMTP Server** (default port 1025).
 You can enter any source and destination address, for example:
 
         Sender Address: <hikvision> hikvision@dvr.local
