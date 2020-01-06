@@ -65,7 +65,7 @@ final class Event implements \JsonSerializable
             'type' => $this->type,
             'device' => $this->device,
             'camera' => $this->camera,
-            'occurred_on' => $this->occurredOn->format(DATE_ATOM),
+            'occurred_on' => $this->occurredOn->format(\DATE_ISO8601),
         ];
     }
 }
