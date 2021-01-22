@@ -19,10 +19,10 @@
          -------------------- ---------------------------------------- 
           Symfony                                                      
          -------------------- ---------------------------------------- 
-          Version              5.0.2                                   
+          Version              5.2.1                                   
           Long-Term Support    No                                      
-          End of maintenance   07/2020                                 
-          End of life          07/2020                                 
+          End of maintenance   07/2021                                 
+          End of life          07/2021                                 
          -------------------- ---------------------------------------- 
           Kernel                                                       
          -------------------- ---------------------------------------- 
@@ -30,7 +30,8 @@
           Environment          dev                                     
           Debug                true                                    
           Charset              UTF-8                                   
-          Cache directory      ./var/cache/dev (674 KiB)               
+          Cache directory      ./var/cache/dev (329 KiB)               
+          Build directory      ./var/cache/dev (329 KiB)               
           Log directory        ./var/log (0 B)                         
          -------------------- ---------------------------------------- 
           PHP                                                          
@@ -38,22 +39,11 @@
           Version              7.4.1                                   
           Architecture         64 bits                                 
           Intl locale          n/a                                     
-          Timezone             UTC (2020-01-06T12:39:19+00:00)         
+          Timezone             UTC (2021-01-22T19:47:27+00:00)         
           OPcache              false                                   
           APCu                 false                                   
           Xdebug               false                                   
          -------------------- ---------------------------------------- 
-          Environment (.env)                                           
-         -------------------- ---------------------------------------- 
-          APP_ENV              dev                                     
-          APP_SECRET           154543ee90e00d4cb8d63fe74bd73a60        
-          TIMEZONE             Europe/Madrid                           
-          FAKE_SMTP_API_URI    http://fake-smtp-server:1080            
-          MQTT_CLIENT_ID       hikvision                               
-          MQTT_BROKER          mqtt                                    
-          MQTT_PORT            1883                                    
-          MQTT_TOPIC           alerts                                  
-         -------------------- ----------------------------------------
 
 5. Now leave the container:
 

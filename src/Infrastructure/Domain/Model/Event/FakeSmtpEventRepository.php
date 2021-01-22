@@ -50,8 +50,8 @@ final class FakeSmtpEventRepository implements EventRepository
         return Event::from(
             $this->mapType($body),
             Device::from(
-                $this->mapDvrName($body),
-                $this->mapDvrSerialNumber($body),
+                $this->mapVrName($body),
+                $this->mapVrSerialNumber($body),
             ),
             Camera::from(
                 $this->mapCameraName($body),
@@ -76,16 +76,16 @@ final class FakeSmtpEventRepository implements EventRepository
         return \DateTime::createFromFormat('Y-m-d,H:i:s', $text, $this->dateTimeZone);
     }
 
-    private function mapDvrName(string $body): string
+    private function mapVrName(string $body): string
     {
-        preg_match_all('/DVR NAME:[ ]*(.*)/', $body, $output_array);
+        preg_match_all('/VR NAME:[ ]*(.*)/', $body, $output_array);
 
         return \trim($output_array[1][0]);
     }
 
-    private function mapDvrSerialNumber(string $body): string
+    private function mapVrSerialNumber(string $body): string
     {
-        preg_match_all('/DVR S\/N:[ ]*(.*)/', $body, $output_array);
+        preg_match_all('/VR S\/N:[ ]*(.*)/', $body, $output_array);
 
         return \trim($output_array[1][0]);
     }
