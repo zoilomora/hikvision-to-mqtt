@@ -44,6 +44,6 @@ services:
       $client: '@mqtt.client'
       $broker: '%mqtt.broker%'
       $port: '%mqtt.port%'
-      $username: 'mqtt.username'
-      $password: 'mqtt.password'
+      $username: '%mqtt.username%'
+      $password: '%mqtt.password%'
       $topic: '%mqtt.topic%'
