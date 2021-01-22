@@ -5,6 +5,8 @@ parameters:
   mqtt.broker: '%env(MQTT_BROKER)%'
   mqtt.port: '%env(MQTT_PORT)%'
   mqtt.topic: '%env(MQTT_TOPIC)%'
+  mqtt.username: '%env(MQTT_USERNAME)%'
+  mqtt.password: '%env(MQTT_PASSWORD)%'
 
 services:
   _defaults:
@@ -42,4 +44,6 @@ services:
       $client: '@mqtt.client'
       $broker: '%mqtt.broker%'
       $port: '%mqtt.port%'
+      $username: 'mqtt.username'
+      $password: 'mqtt.password'
       $topic: '%mqtt.topic%'
